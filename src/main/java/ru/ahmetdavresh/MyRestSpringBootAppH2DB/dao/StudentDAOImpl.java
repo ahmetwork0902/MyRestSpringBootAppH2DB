@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ahmetdavresh.MyRestSpringBootAppH2DB.entity.Student;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
