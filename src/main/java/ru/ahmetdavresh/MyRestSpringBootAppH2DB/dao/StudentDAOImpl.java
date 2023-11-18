@@ -3,7 +3,9 @@ package ru.ahmetdavresh.MyRestSpringBootAppH2DB.dao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.ahmetdavresh.MyRestSpringBootAppH2DB.entity.Student;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
@@ -15,6 +17,7 @@ public class StudentDAOImpl implements StudentDAO {
     private EntityManager entityManager;
 
     @Override
+    @Transactional
     public List<Student> getAllStudents() {
         Query query = entityManager.createQuery("from Student");
         List<Student> allStudents = query.getResultList();
@@ -23,18 +26,21 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
+    @Transactional
     public Student saveStudent(Student student) {
         return entityManager.merge(student);
     }
 
     @Override
+    @Transactional
     public Student getStudent(int id) {
         return entityManager.find(Student.class, id);
     }
 
     @Override
+    @Transactional
     public void deleteStudent(int id) {
-        Query query = entityManager.createQuery("delete from Student " + " where id =:studentId");
+        Query query = entityManager.createQuery("delete from Student where id = :studentId");
         query.setParameter("studentId", id);
         query.executeUpdate();
     }
